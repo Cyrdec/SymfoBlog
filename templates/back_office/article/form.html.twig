@@ -1,0 +1,37 @@
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% extends 'back_office/base.backoffice.html.twig' %}
+
+{% block meta %}{% endblock %}
+
+{% block title %}BackOffice - Gestion des Articles{% endblock %}
+
+{% block stylesheets %}
+  
+{% endblock %}
+
+{% block javascripts %}
+  
+{% endblock %}
+
+{% block body %}
+
+    {{ form_start(form, { 'attr': { 'class': 'form-note'}}) }}
+    {{ form_errors(form) }}
+        <div class="row">
+            <div class="field-group col-7" style="float:left">
+                {{ form_row(form.titre) }}
+                {{ form_row(form.slug) }}
+                {{ form_row(form.contenu) }}
+            </div>
+            <div class="field-group col-5">
+                {{ form_row(form.categories) }}
+                {{ form_row(form.tags) }}
+            </div>
+        </div>
+        <div class="row">
+            {{ form_widget(form.save) }}
+        </div>
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+    
+{% endblock %}

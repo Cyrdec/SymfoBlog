@@ -1,0 +1,61 @@
+{% extends 'back_office/base.backoffice.html.twig' %}
+
+{% block meta %}{% endblock %}
+
+{% block title %}BackOffice - Tables{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block javascripts %}
+    <!-- Page level plugins -->
+    <script src="{{ asset('back_office/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('back_office/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{ asset('back_office/js/demo/datatables-demo.js') }}"></script>
+{% endblock %}
+        
+
+{% block body %}
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800">{{ entity }}</h1>
+        <p class="mb-4">
+            DataTables is a third party plugin that is used to generate the demo table below.
+            {% if entity == 'App\\Entity\\Article' %}
+                <a href="{{ path('back_office_article_new') }}">Ajouter un Article</a>
+            {% elseif entity == 'App\\Entity\\Categorie' %}
+                <a href="{{ path('back_office_categorie_new') }}">Ajouter une Catégorie</a>
+            {% elseif entity == 'App\\Entity\\Tag' %}
+                <a href="{{ path('back_office_tag_new') }}">Ajouter un Mot Clé</a>
+            {% elseif entity == 'App\\Entity\\WebPage' %}
+                <a href="{{ path('back_office_page_new') }}">Ajouter une Page</a>
+            {% endif %}
+        </p>
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    {% if entity == 'App\\Entity\\Article' %}
+                        {% include 'back_office/article/table.html.twig' %}
+                    {% elseif entity == 'App\\Entity\\Categorie' %}
+                        {% include 'back_office/categorie/table.html.twig' %}
+                    {% elseif entity == 'App\\Entity\\Tag' %}
+                        {% include 'back_office/tag/table.html.twig' %}
+                    {% elseif entity == 'App\\Entity\\WebPage' %}
+                        {% include 'back_office/webpage/table.html.twig' %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
