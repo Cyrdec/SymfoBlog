@@ -81,8 +81,20 @@
     "doctrine/sql-formatter": {
         "version": "1.1.1"
     },
+    "easycorp/easyadmin-bundle": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "b131e6cbfe1b898a508987851963fff485986285"
+        }
+    },
     "egulias/email-validator": {
         "version": "2.1.22"
+    },
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.1"
     },
     "friendsofsymfony/ckeditor-bundle": {
         "version": "2.0",
@@ -95,6 +107,15 @@
         "files": [
             "config/packages/fos_ckeditor.yaml"
         ]
+    },
+    "laminas/laminas-code": {
+        "version": "3.5.1"
+    },
+    "laminas/laminas-eventmanager": {
+        "version": "3.3.0"
+    },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.1.1"
     },
     "nikic/php-parser": {
         "version": "v4.10.2"
@@ -269,6 +290,9 @@
     "symfony/polyfill-php80": {
         "version": "v1.18.1"
     },
+    "symfony/polyfill-uuid": {
+        "version": "v1.20.0"
+    },
     "symfony/profiler-pack": {
         "version": "v1.0.5"
     },
@@ -360,6 +384,9 @@
     },
     "symfony/twig-pack": {
         "version": "v1.0.0"
+    },
+    "symfony/uid": {
+        "version": "v5.2.1"
     },
     "symfony/validator": {
         "version": "4.3",
