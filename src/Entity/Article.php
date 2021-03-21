@@ -28,6 +28,11 @@ class Article
      * @ORM\Column(name="slug", type="string", length=255)
      */
     private $slug;
+    
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $intro;
 
     /**
      * @ORM\Column(type="text")
@@ -76,6 +81,8 @@ class Article
 
     public function __construct()
     {
+        $this->dateCreation = new \DateTime();
+        $this->nbreLecture = 0;
         $this->commentaires = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->tags = new ArrayCollection();
@@ -110,6 +117,18 @@ class Article
         return $this;
     }
 
+    public function getIntro(): ?string
+    {
+        return $this->intro;
+    }
+
+    public function setIntro(string $intro): self
+    {
+        $this->intro = $intro;
+
+        return $this;
+    }
+    
     public function getContenu(): ?string
     {
         return $this->contenu;
@@ -268,5 +287,10 @@ class Article
         $this->image = $image;
 
         return $this;
+    }
+    
+    public function getClass(): string
+    {
+        return Article::class;
     }
 }

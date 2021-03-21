@@ -1,4 +1,4 @@
-{% set namespace = 'App\\Controller\\FrontOffice\\' %}
+{% set namespace = 'App\\Controller\\Front\\' %}
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -11,27 +11,30 @@
         
         <title>{% block title %}Blog Post - Start Bootstrap Template{% endblock %}</title>
         <!-- Bootstrap core CSS -->
-        <link href="{{ asset('front_office_bpost/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset(skin~'/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
         <!-- Custom styles for this template -->
-        <link href="{{ asset('front_office_bpost/css/blog-post.css') }}" rel="stylesheet">
+        <link href="{{ asset(skin~'/css/blog-post.css') }}" rel="stylesheet">
         {% block stylesheets %}{% endblock %}
     </head>
     <body id="page-top">
-        {% include 'front_office_bpost/_trans/menu.html.twig' %}
+        {% include skin~'/_trans/menu.html.twig' %}
         
         <!-- Page Content -->
-        <div class="container">
+        <div class="container main-content">
             <div class="row">
-              {% block body %}{% endblock %}
-              <!-- Sidebar Widgets Column -->
-              {% include 'front_office_bpost/_trans/side.bar.html.twig' %}
+                <!-- Post Content Column -->
+                <div class="col-lg-8">
+                {% block body %}{% endblock %}
+                </div>
+                {# Sidebar Widgets Column #}
+                {{ render(controller(namespace~'WidgetController::sideBar')) }}
             </div>
         </div>
         
-        {% include 'front_office_bpost/_trans/footer.html.twig' %}
+        {% include skin~'/_trans/footer.html.twig' %}
         
-        <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-        <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}'"></script>
+        <script src="{{ asset(skin~'/js/jquery.min.js') }}"></script>
+        <script src="{{ asset(skin~'/bootstrap/js/bootstrap.bundle.min.js') }}'"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

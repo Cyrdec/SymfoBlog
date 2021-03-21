@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
@@ -78,21 +79,22 @@ class ArticleCrudController extends AbstractCrudController
 
         $titre = TextField::new('titre');
         $slug = TextField::new('slug');
+        $intro = TextareaField::new('intro');
         $contenu = TextareaField::new('contenu')->setFormType(CKEditorType::class);
-        $dateCreation = DateField::new('dateCreation');
-        $dateModification = DateField::new('dateModification');
+        $dateCreation = DateTimeField::new('dateCreation');
+        $dateModification = DateTimeField::new('dateModification');
         $categories = AssociationField::new('categories');
         $tags = AssociationField::new('tags');
-        $datePublication = DateField::new('datePublication');
+        $datePublication = DateTimeField::new('datePublication');
         $nbreLecture = NumberField::new('nbreLecture');
         $image = TextField::new('image');
         
         if (Crud::PAGE_INDEX === $pageName) {
-            return [$titre, $slug, $contenu, $tags, $nbreLecture];
+            return [$titre, $slug, $intro, $tags, $nbreLecture];
         }
 
         return [
-            $titre, $slug, $contenu, $categories, $tags, $datePublication, $image 
+            $titre, $slug, $intro, $contenu, $categories, $tags, $datePublication, $image 
         ];
     }
     

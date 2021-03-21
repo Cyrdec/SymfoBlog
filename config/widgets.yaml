@@ -1,0 +1,21 @@
+widgets: 
+    implement:
+        # Search widget
+        search: 
+            class: App\Controller\Front\Widget\SearchWidget
+        
+        #Categorie Widget
+        categorie: 
+            class: App\Controller\Front\Widget\CategorieWidget
+        
+        # Text Widget
+        text: 
+            class: App\Controller\Front\Widget\TextWidget
+            params:
+                titre: widget_text_titre
+                contenu: widget_text_contenu
+
+    sidebar:
+        - 'search'
+        - 'categorie'
+        - 'text'

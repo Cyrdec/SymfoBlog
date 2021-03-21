@@ -18,6 +18,29 @@ class ArticleRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Article::class);
     }
+    
+    public function findLastArticle(int $limit): ?array
+    {
+        return $this->createQueryBuilder('a')
+            ->Where('a.datePublication <= :date')->setParameter('date', date_create('now'))
+            ->orderBy('a.id', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
+    public function searchWord(string $texte, int $limit = 50): ?array
+    {
+        return $this->createQueryBuilder('a')
+            ->Where('a.datePublication <= :date')->setParameter('date', date_create('now'))
+            ->andWhere('a.intro LIKE :texte OR a.contenu LIKE :texte')->setParameter('texte', '%'.$texte.'%')
+            ->orderBy('a.id', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
     // /**
     //  * @return Article[] Returns an array of Article objects

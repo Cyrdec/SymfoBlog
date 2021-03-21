@@ -1,0 +1,5 @@
+<label class="titre"><a href="{{ path('article_page', {'slug':a.slug}) }}">{{ a.titre }}</a></label>
+<label class="date">({{ a.datePublication|date('d/m/Y H:i:s') }})</label>
+<div class="intro">
+    {{ a.intro }}
+</div>

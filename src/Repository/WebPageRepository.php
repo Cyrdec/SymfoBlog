@@ -19,22 +19,36 @@ class WebPageRepository extends ServiceEntityRepository
         parent::__construct($registry, WebPage::class);
     }
 
-    // /**
-    //  * @return WebPage[] Returns an array of WebPage objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return WebPage[] Returns an array of WebPage objects
+     */
+    public function header(): ?array
     {
         return $this->createQueryBuilder('w')
-            ->andWhere('w.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('w.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('w.header = :val')
+            ->setParameter('val', true)
+            ->orderBy('w.nom', 'ASC')
+            ->setMaxResults(5)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
+    /**
+     * @return WebPage[] Returns an array of WebPage objects
+     */
+    public function footer(): ?array
+    {
+        return $this->createQueryBuilder('w')
+            ->andWhere('w.footer = :val')
+            ->setParameter('val', true)
+            ->orderBy('w.nom', 'ASC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
 
     /*
     public function findOneBySomeField($value): ?WebPage

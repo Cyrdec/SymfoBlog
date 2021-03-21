@@ -1,0 +1,15 @@
+{% extends skin~'/base.html.twig' %}
+
+{% block meta %}{% endblock %}
+
+{% block title %}{{ webpage.nom }}{% endblock %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block javascripts %}{% endblock %}
+
+{% block body %}
+
+    {{ webpage.contenu|raw }}
+
+{% endblock %}

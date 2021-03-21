@@ -1,7 +1,9 @@
-<!-- Footer -->
-  <footer class="py-5 bg-dark">
+{# Footer #}
+<footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+        {# Affichage des pages du sites #}
+        {{ render(controller(namespace~'FrontController::menuBottomPages')) }}
+        {# Copyleft #}
+        <p class="m-0 text-center text-white">Copyleft &copy; Your Website 2021</p>
     </div>
-    <!-- /.container -->
-  </footer>
+</footer>

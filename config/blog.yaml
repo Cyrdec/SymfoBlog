@@ -1,0 +1,6 @@
+parameters:
+    # Nom du parametre du skin pour front Office
+    app.params.skin: skin_front
+    # Logo
+    logo.image: logo.png
+    logo.label: SSdPP

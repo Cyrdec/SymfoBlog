@@ -1,11 +1,5 @@
-{% set namespace_widget = namespace~'Widget\\' %}
 <div class="col-md-4">
-    {# Search Widget #}
-    {{ render(controller(namespace_widget~'SearchWidgetController::launch')) }}
-
-    {# Categories Widget #}
-    {{ render(controller(namespace_widget~'CategoriesWidgetController::launch')) }}
-    
-    {# Text Widget #}
-    {{ render(controller(namespace_widget~'TextWidgetController::launch')) }}
+    {% for class in sideBarWidgets %}
+        {{ render(controller(class.name~'::'~class.method, class.attributes)) }}
+    {% endfor %}
 </div>

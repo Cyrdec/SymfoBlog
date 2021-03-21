@@ -1,0 +1,32 @@
+{% extends skin~'/base.html.twig' %}
+
+{% block meta %}{% endblock %}
+
+{% block title %}Recherche : {{ texte }}{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        
+    </style>
+{% endblock %}
+
+{% block javascripts %}{% endblock %}
+
+{% block body %}
+    <h1>Résultat de la recherche pour {{ texte }}</h1>
+    {# Listing #}
+    {% if listing|length > 0 %}
+        <h2>{{ listing|length }} éléments trouvés</h2>
+        <ol>
+            {% for el in listing %}
+            <li>
+                {% if el.class == 'App\\Entity\\Article' %}
+                    {% include skin~'/_listes/article.html.twig' with {'a': el} %}
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ol>
+    {% else %}
+        <h2>Aucun résultat trouvé pour cette recherche</h2>
+    {% endif %}
+{% endblock %}

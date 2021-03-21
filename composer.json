@@ -27,10 +27,13 @@
         "symfony/yaml": "5.2.*",
         "symfonycasts/verify-email-bundle": "^1.0",
         "twig/extra-bundle": "^3.1",
+        "twig/string-extra": "^3.1",
         "twig/twig": "^3.1"
     },
     "require-dev": {
-        "symfony/maker-bundle": "^1.26"
+        "symfony/debug-bundle": "5.2.*",
+        "symfony/maker-bundle": "^1.26",
+        "symfony/var-dumper": "5.2.*"
     },
     "config": {
         "optimize-autoloader": true,

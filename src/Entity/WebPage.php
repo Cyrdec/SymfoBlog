@@ -18,21 +18,26 @@ class WebPage
      * @ORM\Column(type="integer")
      */
     private $id;
-
     /**
      * @ORM\Column(type="string", length=100)
      */
     private $nom;
-
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
-
     /**
      * @ORM\Column(type="text")
      */
     private $contenu;
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $header;
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $footer;
 
     /**
      * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="webPages")
@@ -111,8 +116,31 @@ class WebPage
         return $this;
     }
     
+    function getHeader(): bool
+    {
+        return $this->header;
+    }
+
+    function getFooter(): bool
+    {
+        return $this->footer;
+    }
+
+    function setHeader(?bool $header) {
+        $this->header = $header;
+    }
+
+    function setFooter(?bool $footer) {
+        $this->footer = $footer;
+    }
+        
     public function __toString(): string {
         return $this->nom;
+    }
+    
+    public function getClass(): string
+    {
+        return WebPage::class;
     }
 
 }

@@ -9,6 +9,7 @@ use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -75,13 +76,15 @@ class WebPageCrudController extends AbstractCrudController
         $slug = TextField::new('slug');
         $contenu = TextareaField::new('contenu')->setFormType(CKEditorType::class);
         $tags = AssociationField::new('tags');
+        $header = BooleanField::new('header');
+        $footer = BooleanField::new('footer');
         
         if (Crud::PAGE_INDEX === $pageName) {
-            return [$nom, $slug, $contenu];
+            return [$nom, $slug, $contenu, $header, $footer];
         }
 
         return [
-            $nom, $slug, $contenu, $tags
+            $nom, $slug, $contenu, $tags, $header, $footer
         ];
     }
     

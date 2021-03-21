@@ -1,0 +1,37 @@
+{% extends skin~'/base.html.twig' %}
+
+{% block meta %}{% endblock %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block stylesheets %}
+  
+{% endblock %}
+
+{% block javascripts %}
+  
+{% endblock %}
+
+{% block body %}
+    {# EDITO #}
+    {% if edito is defined %}
+        <h1 class="mt-4">EDITO</h1>
+        <hr>
+        {{ edito.contenu|raw }}
+        <hr>
+    {% endif %}
+    
+    {# Les 4 derniers articles #}
+    <div class="row">
+        {% for a in articles %}
+        <div class="card my-4 col-6">
+            <h5 class="card-header">Articles</h5>
+            <div class="card-body">
+                <div class="row">
+                    {{ a.intro }}
+                 </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
