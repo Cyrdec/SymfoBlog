@@ -8,13 +8,16 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ArticleRepository;
 use App\Repository\EditoRepository;
 use App\Repository\ParametreRepository;
-use App\Repository\WebPageRepository;
+use App\Repository\PageRepository;
+
+use App\ConstantsTrait;
 
 /**
  * 
  */
 class FrontController extends GenericController
 {
+    use ConstantsTrait;
     
     /**
      * @return Response
@@ -22,13 +25,15 @@ class FrontController extends GenericController
      */
     public function homepage(): Response
     {   
+        $nbreEdito = $this->paramRepository->findOneBy(['cle' => ConstantsTrait::$PARAM_NBRE_EDITO_HOMEPAGE]);
+        
         // Récupération du dernier édito (en fonction de la date de publication)
-        $edito = $this->editoRepository->findLastEdito();
+        $editos = $this->editoRepository->findLastEdito(($nbreEdito !== null)?$nbreEdito->getValeur():1);
         $articles = $this->articleRepository->findLastArticle(4);
         
         return $this->myRender('/pages/homepage.html.twig', [
             'skin' => $this->skin, 
-            'edito' => $edito,
+            'editos' => $editos,
             'articles' => $articles
         ]);
     }
@@ -73,12 +78,13 @@ class FrontController extends GenericController
     
     /**
      * Affiche les différentes pages dans le menu d'entête du site
+     * @param $nbre|null
      * @return Response
      */
-    public function menuTopPages(): Response
+    public function menuTopPages(int $nbre = 5): Response
     {
-        $pages = $this->webpageRepository->header();
-        return $this->myRender('/_trans/menu.top.pages.html.twig', [
+        $pages = $this->webpageRepository->header($nbre);
+        return $this->myRender('/_trans/menu/menu.top.pages.html.twig', [
             'pages' => $pages
         ]);
     }
@@ -90,7 +96,7 @@ class FrontController extends GenericController
     public function menuBottomPages(): Response
     {
         $pages = $this->webpageRepository->footer();
-        return $this->myRender('/_trans/footer.pages.html.twig', [
+        return $this->myRender('/_trans/footer/footer.pages.html.twig', [
             'pages' => $pages
         ]);
     }
@@ -109,7 +115,7 @@ class FrontController extends GenericController
     private $webpageRepository;
     
     public function __construct(EditoRepository $editoRepository, ParametreRepository $paramRepository, 
-            ArticleRepository $articleRepository, WebPageRepository $webpageRepository) 
+            ArticleRepository $articleRepository, PageRepository $webpageRepository) 
     {
         parent::__construct($paramRepository);
         $this->editoRepository = $editoRepository;

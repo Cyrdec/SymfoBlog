@@ -67,14 +67,14 @@ class TagCrudController extends AbstractCrudController
         $nom = TextField::new('nom');
         $slug = TextField::new('slug');
         $articles = AssociationField::new('articles');
-        $webPages = AssociationField::new('webPages');
+        $pages = AssociationField::new('pages');
         
         if (Crud::PAGE_INDEX === $pageName) {
-            return [$nom, $slug, $articles, $webPages];
+            return [$nom, $slug, $articles, $pages];
         }
 
         return [
-            $nom, $slug, $articles, $webPages
+            $nom, $slug, $articles, $pages
         ];
     }
     

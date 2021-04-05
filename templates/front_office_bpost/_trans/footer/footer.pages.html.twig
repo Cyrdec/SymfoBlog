@@ -1,0 +1,15 @@
+<style>
+    
+    
+</style>
+    <ul class="navbar-nav text-center text-white" style="flex-direction: row;">
+        {% for page in pages %}
+        <li class="nav-item" style="padding-right:0.5rem; padding-left: .5rem; ">
+            <a class="nav-link" style="display:block;" href="{{ path('webpage_page', {'slug': page.slug}) }}">{{ page.nom }}</a>
+        </li>
+        {% endfor %}
+        <li class="nav-item" style="padding-right:0.5rem; padding-left: .5rem; ">
+            <a class="nav-link" style="display:block;" href="#">Administration</a>
+        </li>
+    </ul>
+

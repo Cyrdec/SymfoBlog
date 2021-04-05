@@ -1,0 +1,29 @@
+
+<section id="slider_area" class="welcome-area">
+    <div id="particles-js"></div>
+    <div class="slider_active owl-carousel">
+        {% for e in editos %}
+            <div class="single-slide-item">
+                <div class="single-slide-item-table">
+                    <div class="single-slide-item-tablecell">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-7 col-sm-12">
+                                    <div class="single_slide_text">
+                                        <h1 class="slider_title animated">{{ e.titre }}</h1>
+                                        <p class="slider_subtitle animated">{{ e.contenu|raw }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 text-center hidden-sm hidden-xs">
+                                    <div class="slider_image animated">
+                                        <img src="{{ asset(skin~'/images/slider/slider-1.png') }}" alt=""/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </div><!-- End Single Slider-->			
+        {% endfor %}
+    </div>
+</section>

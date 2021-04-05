@@ -1,0 +1,23 @@
+{% extends skin~'/base.html.twig' %}
+
+{% block meta %}{% endblock %}
+
+{% block title %}{{ webpage.nom }}{% endblock %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block javascripts %}{% endblock %}
+
+{% block body %}
+    <section class="section_padding" style="margin-top:50px;">
+        <div class="container">
+            <div class="section_heading text-center">
+                <h2>{{ webpage.nom }}</h2>
+            </div>
+            <div class="row">		
+                {{ webpage.contenu|raw }}
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

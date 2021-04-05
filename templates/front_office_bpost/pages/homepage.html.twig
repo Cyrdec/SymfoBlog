@@ -14,10 +14,10 @@
 
 {% block body %}
     {# EDITO #}
-    {% if edito is defined %}
+    {% if editos is not null %}
         <h1 class="mt-4">EDITO</h1>
         <hr>
-        {{ edito.contenu|raw }}
+        {{ editos[0].contenu|raw }}
         <hr>
     {% endif %}
     
@@ -25,7 +25,7 @@
     <div class="row">
         {% for a in articles %}
         <div class="card my-4 col-6">
-            <h5 class="card-header">Articles</h5>
+            <h5 class="card-header no-background">Articles</h5>
             <div class="card-body">
                 <div class="row">
                     {{ a.intro }}

@@ -11,8 +11,12 @@ h1 { margin-top: 1.5rem!important; font-size: 1.25rem; font-weight: bolder; }
 h2 { margin-top: 15px; font-size: 14px; border-bottom: 1px dashed graytext; }
 
 nav.navbar  { background-color: #82B2B6!important; }
-footer.py-5 { background-color: #82B2B6!important; padding-bottom: 0.5rem!important; padding-top: 0.5rem!important; }
+footer.py-5 { background-color: #82B2B6!important; padding-bottom: 0.5rem!important; padding-top: .5rem!important; }
 footer a.nav-link { color: rgba(255,255,255,.5); }
+
+.card { border-color: #82B2B6; }
+.card-header { background-color: #82B2B6!important; }
+.no-background { background-color: #FFF!important; }
 
 @media (min-width: 1200px) {
     div.main-content { min-height: 550px; }

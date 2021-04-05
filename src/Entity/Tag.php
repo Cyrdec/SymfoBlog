@@ -35,14 +35,14 @@ class Tag
     private $articles;
 
     /**
-     * @ORM\ManyToMany(targetEntity=WebPage::class, mappedBy="tags")
+     * @ORM\ManyToMany(targetEntity=Page::class, mappedBy="tags")
      */
-    private $webPages;
+    private $pages;
 
     public function __construct()
     {
         $this->articles = new ArrayCollection();
-        $this->webPages = new ArrayCollection();
+        $this->pages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -103,28 +103,28 @@ class Tag
     }
 
     /**
-     * @return Collection|WebPage[]
+     * @return Collection|Page[]
      */
-    public function getWebPages(): Collection
+    public function getPages(): Collection
     {
-        return $this->webPages;
+        return $this->pages;
     }
 
-    public function addWebPage(WebPage $webPage): self
+    public function addPage(Page $page): self
     {
-        if (!$this->webPages->contains($webPage)) {
-            $this->webPages[] = $webPage;
-            $webPage->addTag($this);
+        if (!$this->pages->contains($page)) {
+            $this->pages[] = $page;
+            $page->addTag($this);
         }
 
         return $this;
     }
 
-    public function removeWebPage(WebPage $webPage): self
+    public function removePage(Page $page): self
     {
-        if ($this->webPages->contains($webPage)) {
-            $this->webPages->removeElement($webPage);
-            $webPage->removeTag($this);
+        if ($this->pages->contains($page)) {
+            $this->pages->removeElement($page);
+            $page->removeTag($this);
         }
 
         return $this;

@@ -1,0 +1,82 @@
+<!-- https://getmasum.com/html-preview/azapp/ -->
+{% set namespace = 'App\\Controller\\Front\\' %}
+
+<!Doctype html>
+<html lang="fr_FR">
+    <head>
+        <title>GESPARC - Gestionnaire de Parc pour Enfants</title>	
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />	
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,600,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+        <link href="{{ asset(skin~'/css/bootstrap.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset(skin~'/fonts/font-awesome.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset(skin~'/fonts/themify-icons.css') }}" rel="stylesheet" />
+        <link href="{{ asset(skin~'/css/meanmenu.css') }}" rel="stylesheet" />
+        <link href="{{ asset(skin~'/css/owl.carousel.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset(skin~'/css/slick.css') }}" rel="stylesheet" />
+        <link href="{{ asset(skin~'/css/slick-theme.css') }}" rel="stylesheet" />
+        <link href="{{ asset(skin~'/css/animate.css') }}" rel="stylesheet" />
+        <link href="{{ asset(skin~'/css/animate.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset(skin~'/css/owl.theme.default.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset(skin~'/css/style.css') }}" rel="stylesheet" />
+        <link href="{{ asset(skin~'/css/responsive.css') }}" rel="stylesheet" />
+        <!-- CSS FOR COLOR SWITCHER -->
+        <link rel="stylesheet" href="{{ asset(skin~'/css/switcher/switcher.css') }}">
+        <link rel="stylesheet" href="{{ asset(skin~'/css/switcher/style1.css') }}" id="colors">	
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->	
+    </head>
+	<body>
+            <!-- START PRELOADER -->
+            <div class="preloader">
+                <div class="spinner">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
+                </div>
+            </div>
+            <!-- END PRELOADER -->
+	
+            <!-- START NAVBAR -->
+            <div class="navbar navbar-default navbar-fixed-top menu-top">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a href="{{ path('homepage') }}" class="navbar-brand">
+                            <img src="{{ asset(skin~'/images/logo.png') }}" class="logo-main" alt="logo">
+                            <img src="{{ asset(skin~'/images/logo-white.png') }}" class="logo-white" alt="logo">
+                        </a>
+                    </div>
+                    {% include skin~'/_trans/menu.top.html.twig' %}
+                </div> <!-- END CONTAINER -->
+            </div>
+            <!-- END NAVBAR -->
+		
+                
+        {% block body %}{% endblock %}
+		
+		
+        <!-- START FOOTER -->
+        {% include skin~'/_trans/footer.html.twig' %}
+        <!-- END FOOTER -->
+		
+		
+        <!-- SCRIPTS -->
+        <script src="{{ asset(skin~'/js/jquery-1.12.4.min.js') }}"></script>
+        <script src="{{ asset(skin~'/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset(skin~'/js/jquery.meanmenu.js') }}"></script>
+        <script src="{{ asset(skin~'/js/owl.carousel.min.js') }}"></script>
+        <script src="{{ asset(skin~'/js/particles.min.js') }}"></script>
+        <script src="{{ asset(skin~'/js/app.js') }}"></script>		
+        <script src="{{ asset(skin~'/js/jquery.counterup.js') }}"></script>
+        <script src="{{ asset(skin~'/js/waypoints.min.js') }}"></script>
+        <script src="{{ asset(skin~'/js/wow.min.js') }}"></script>
+        <script src="{{ asset(skin~'/js/slick.min.js') }}"></script>
+        <script src="{{ asset(skin~'/js/simplePlayer.js') }}"></script>
+        <script src="{{ asset(skin~'/js/scripts.js') }}"></script>
+
+    </body>
+</html>

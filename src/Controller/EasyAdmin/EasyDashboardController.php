@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Entity\Edito;
-use App\Entity\WebPage;
+use App\Entity\Page;
 use App\Entity\Tag;
 use App\Entity\Article;
 use App\Entity\Categorie;
@@ -45,7 +45,7 @@ class EasyDashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Interface', 'fa fa-sitemap')->setCssClass('section');
         yield MenuItem::linkToCrud('Edito', 'fa fa-keyboard', Edito::class);
-        yield MenuItem::linkToCrud('Pages', 'fa fa-file', WebPage::class);
+        yield MenuItem::linkToCrud('Pages', 'fa fa-file', Page::class);
         yield MenuItem::linkToCrud('Tag', 'fa fa-tag', Tag::class);
         
         yield MenuItem::section('Blog', 'fa fa-blog')->setCssClass('section');
