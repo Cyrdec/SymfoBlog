@@ -5,6 +5,9 @@ namespace App\Controller\Front;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Mailer\MailerInterface;
+
 use App\Repository\ArticleRepository;
 use App\Repository\EditoRepository;
 use App\Repository\ParametreRepository;
@@ -114,10 +117,11 @@ class FrontController extends GenericController
      */
     private $webpageRepository;
     
-    public function __construct(EditoRepository $editoRepository, ParametreRepository $paramRepository, 
+    public function __construct(MailerInterface $mailer, LoggerInterface $logger, 
+            EditoRepository $editoRepository, ParametreRepository $paramRepository, 
             ArticleRepository $articleRepository, PageRepository $webpageRepository) 
     {
-        parent::__construct($paramRepository);
+        parent::__construct($mailer, $logger, $paramRepository);
         $this->editoRepository = $editoRepository;
         $this->articleRepository = $articleRepository;
         $this->webpageRepository = $webpageRepository;

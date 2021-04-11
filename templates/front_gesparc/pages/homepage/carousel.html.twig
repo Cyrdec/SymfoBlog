@@ -11,12 +11,12 @@
                                 <div class="col-md-7 col-sm-12">
                                     <div class="single_slide_text">
                                         <h1 class="slider_title animated">{{ e.titre }}</h1>
-                                        <p class="slider_subtitle animated">{{ e.contenu|raw }}</p>
+                                        <p class="slider_subtitle animated">{{ e.intro|raw }}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-5 text-center hidden-sm hidden-xs">
                                     <div class="slider_image animated">
-                                        <img src="{{ asset(skin~'/images/slider/slider-1.png') }}" alt=""/>
+                                        <img src="uploads/edito/{{ e.image }}" alt=""/>
                                     </div>
                                 </div>
                             </div>

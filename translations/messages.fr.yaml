@@ -1,0 +1,35 @@
+# Générique
+jour.1: Lundi
+jour.mini.1: Lu
+jour.2: Mardi
+jour.mini.2: Ma
+jour.3: Mercredi
+jour.mini.3: Me
+jour.4: Jeudi
+jour.mini.4: Je
+jour.5: Vendredi
+jour.mini.5: Ve
+jour.6: Samedi
+jour.mini.6: Sa
+jour.7: Dimanche
+jour.mini.7: Di
+
+mois.01: Janvier
+mois.02: Février
+mois.03: Mars
+mois.04: Avril
+mois.05: Mai
+mois.06: Juin
+mois.07: Juillet
+mois.08: Aout
+mois.09: Septembre
+mois.10: Octobre
+mois.11: Novembre
+mois.12: Décembre
+
+# Widget Contact
+widget.contact.nom: Nom
+widget.contact.email: Email
+widget.contact.message: Votre message
+widget.contact.confirmation.validation.ok: Votre demande a bien été prise en compte, vous serez recontacter rapidement.
+widget.contact.button.validate: Envoyer le message

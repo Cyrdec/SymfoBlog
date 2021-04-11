@@ -9,7 +9,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use App\Entity\Contact;
 use App\Entity\Edito;
+use App\Entity\Image;
 use App\Entity\Page;
 use App\Entity\Tag;
 use App\Entity\Article;
@@ -45,8 +47,9 @@ class EasyDashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Interface', 'fa fa-sitemap')->setCssClass('section');
         yield MenuItem::linkToCrud('Edito', 'fa fa-keyboard', Edito::class);
+        //yield MenuItem::linkToCrud('Images', 'fa fa-images', Image::class);
         yield MenuItem::linkToCrud('Pages', 'fa fa-file', Page::class);
-        yield MenuItem::linkToCrud('Tag', 'fa fa-tag', Tag::class);
+        yield MenuItem::linkToCrud('Tags', 'fa fa-tag', Tag::class);
         
         yield MenuItem::section('Blog', 'fa fa-blog')->setCssClass('section');
         yield MenuItem::linkToCrud('Article', 'fa fa-newspaper', Article::class);
@@ -54,6 +57,7 @@ class EasyDashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Commentaire', 'fa fa-comment', Commentaire::class);
         
         yield MenuItem::section('Configuration', 'fa fa-ellipsis-v')->setCssClass('section');
+        yield MenuItem::linkToCrud('Contact', 'fa fa-envelope', Contact::class);
         yield MenuItem::linkToCrud('Paramétrage', 'fa fa-cog', Parametre::class);
         
 

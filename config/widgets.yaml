@@ -1,5 +1,9 @@
 widgets: 
     implement:
+        #Contact Widget
+        contact:
+            class: App\Controller\Front\Widget\ContactWidget
+                
         # Search widget
         search: 
             class: App\Controller\Front\Widget\SearchWidget

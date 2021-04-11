@@ -1,0 +1,43 @@
+#/config/packages/prod
+monolog:
+    handlers:
+        main:
+            type:               fingers_crossed
+            action_level:       error
+            handler:            erreur_log
+            excluded_http_codes: [404]
+        erreur_log:
+            type:               rotating_file
+            max_files:          30
+            level:              error
+            path:               "%kernel.logs_dir%/erreur-%kernel.environment%.log"
+            channels:           ["!app"]
+        
+        application_log:
+            type:               rotating_file
+            max_files:          30
+            path:               "%kernel.logs_dir%/application-%kernel.environment%.log"
+            level:              warning
+            channels:           app
+
+        doctrine_log:
+            type:               rotating_file
+            max_files:          15
+            path:               "%kernel.logs_dir%/doctrine.log"
+            level:              info
+            channels:           doctrine
+           
+        login:
+            type:               rotating_file
+            max_files:          15
+            path:               "%kernel.logs_dir%/%kernel.environment%.auth.log"
+            level:              info
+            channels:           security
+           
+        default:
+            type:               rotating_file
+            max_files:          30
+            path:               "%kernel.logs_dir%/%kernel.environment%.log"
+            level:              error
+            channels:           ["!doctrine", "!app"]
+        

@@ -6,6 +6,7 @@ use App\Entity\Edito;
 
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -14,6 +15,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 class EditoCrudController extends AbstractCrudController
 {
+    const UPLOAD_PATH_EDITO = 'uploads/edito';
+    
     public static function getEntityFqcn(): string
     {
         return Edito::class;
@@ -30,7 +33,7 @@ class EditoCrudController extends AbstractCrudController
         return $crud
             ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig')
             ->setEntityLabelInSingular('un nouvel Edito')
-            ->setEntityLabelInPlural('Gestion des Edito')
+            ->setEntityLabelInPlural('Gestion des Editos')
             ->setPaginatorPageSize(20)
             ->setDefaultSort(['id' => 'DESC'])
         ;
@@ -43,15 +46,20 @@ class EditoCrudController extends AbstractCrudController
 
         $titre = TextField::new('titre');
         $slug = TextField::new('slug');
+        $intro = TextareaField::new('intro')->setFormType(CKEditorType::class);
         $contenu = TextareaField::new('contenu')->setFormType(CKEditorType::class);
+        $image = ImageField::new('image')
+                ->setBasePath(self::UPLOAD_PATH_EDITO)
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setUploadDir('public/'.self::UPLOAD_PATH_EDITO);
         $datePublication = DateTimeField::new('datePublication')->setFormat('dd/MM/yy HH:mm:ss');
         
         if (Crud::PAGE_INDEX === $pageName) {
-            return [$id, $titre, $slug, $datePublication];
+            return [$id, $titre, $slug, $intro, $image, $datePublication];
         }
         
         return [
-            $titre, $slug, $contenu, $datePublication
+            $titre, $slug, $intro, $contenu, $image, $datePublication
         ];
     }
     

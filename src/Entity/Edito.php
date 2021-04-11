@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\EditoRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\HttpFoundation\File\File;
+
 /**
  * @ORM\Table(name="edito")
  * @ORM\Entity(repositoryClass=EditoRepository::class)
@@ -37,6 +39,16 @@ class Edito
      * @ORM\Column(type="datetime")
      */
     private $datePublication;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $intro;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
 
     public function getId(): ?int
     {
@@ -94,5 +106,29 @@ class Edito
     public function getClass(): string
     {
         return Edito::class;
+    }
+
+    public function getIntro(): ?string
+    {
+        return $this->intro;
+    }
+
+    public function setIntro(?string $intro): self
+    {
+        $this->intro = $intro;
+
+        return $this;
+    }
+    
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
     }
 }

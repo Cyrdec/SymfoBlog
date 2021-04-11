@@ -43,9 +43,20 @@ class Page
      */
     private $tags;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Page::class, inversedBy="pages")
+     */
+    private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Page::class, mappedBy="parent")
+     */
+    private $pages;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->pages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -140,6 +151,48 @@ class Page
     public function getClass(): string
     {
         return Page::class;
+    }
+
+    public function getParent(): ?self
+    {
+        return $this->parent;
+    }
+
+    public function setParent(?self $parent): self
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getPages(): Collection
+    {
+        return $this->pages;
+    }
+
+    public function addPage(self $page): self
+    {
+        if (!$this->pages->contains($page)) {
+            $this->pages[] = $page;
+            $page->setParent($this);
+        }
+
+        return $this;
+    }
+
+    public function removePage(self $page): self
+    {
+        if ($this->pages->removeElement($page)) {
+            // set the owning side to null (unless already changed)
+            if ($page->getParent() === $this) {
+                $page->setParent(null);
+            }
+        }
+
+        return $this;
     }
 
 }
