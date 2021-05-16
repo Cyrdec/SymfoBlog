@@ -1,0 +1,32 @@
+<section id="blog" class="section_padding">
+	<div class="container">
+		<div class="section_heading text-center">
+      	<h2>Derniers Articles</h2>
+        	<p>Tenez vous au courant des dernières nouveautés de l'application</p>
+		</div>
+		<!-- END SECTION HEADING -->
+		{% for a in articles %}
+			<div class="row">
+				<div class="col-md-4 col-sm-6">
+         		<div class="single_blog">
+         			{% if a.image is defined %}
+            			<div class="post_image">
+            				<img src="uploads/edito/{{ a.image }}" class="img-responsive" alt=""/>
+               		</div>
+						{% endif %}
+						<div class="blog_post_content">
+               		<h3><a href="{{ path('article_page', {'slug':a.slug})}}">{{ a.titre }}</a></h3>
+							<ul class="blog_info">
+                     	{#<li><i class="ti-user"></i> <a href="#">Admin</a></li>#}
+								<li>{% if a.categories|length > 0 %}<i class="ti-link"></i>&nbsp;{% for categorie in a.categories|slice(0,1) %}{{ categorie }}{% endfor %}{% endif %}</li>
+                        <li>{% if a.categories|length > 0 %}<i class="ti-tag"></i>&nbsp;{% for tag in a.tags|slice(0,1) %}{{ tag }}{% endfor %}{% endif %}</li>
+                     </ul>
+							<p>{{ a.intro }}</p>				
+						</div>
+					</div>
+				</div>
+				<!-- End Col -->
+			{% endfor %}				
+		</div>
+	</div>
+</section>

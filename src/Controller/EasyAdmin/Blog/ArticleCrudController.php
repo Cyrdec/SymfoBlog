@@ -81,16 +81,16 @@ class ArticleCrudController extends AbstractCrudController
         $slug = TextField::new('slug');
         $intro = TextareaField::new('intro');
         $contenu = TextareaField::new('contenu')->setFormType(CKEditorType::class);
-        $dateCreation = DateTimeField::new('dateCreation');
-        $dateModification = DateTimeField::new('dateModification');
+        //$dateCreation = DateTimeField::new('dateCreation');
+        //$dateModification = DateTimeField::new('dateModification');
         $categories = AssociationField::new('categories');
         $tags = AssociationField::new('tags');
-        $datePublication = DateTimeField::new('datePublication');
+        $datePublication = DateField::new('datePublication')->setFormat('dd/MM/yyyy');
         $nbreLecture = NumberField::new('nbreLecture');
         $image = TextField::new('image');
         
         if (Crud::PAGE_INDEX === $pageName) {
-            return [$titre, $slug, $intro, $tags, $nbreLecture];
+            return [$titre, $slug, $intro, $tags, $datePublication, $nbreLecture];
         }
 
         return [

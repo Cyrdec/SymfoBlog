@@ -7,11 +7,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Mailer\MailerInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
+use App\Entity\Tracker;
 use App\Repository\ArticleRepository;
 use App\Repository\EditoRepository;
 use App\Repository\ParametreRepository;
 use App\Repository\PageRepository;
+use App\Repository\TrackerRepository;
 
 use App\ConstantsTrait;
 
@@ -32,9 +35,10 @@ class FrontController extends GenericController
         
         // Récupération du dernier édito (en fonction de la date de publication)
         $editos = $this->editoRepository->findLastEdito(($nbreEdito !== null)?$nbreEdito->getValeur():1);
-        $articles = $this->articleRepository->findLastArticle(4);
+        $articles = $this->articleRepository->findLastArticle(3);
         
         return $this->myRender('/pages/homepage.html.twig', [
+				'page' => 'homepage', 'slug' => '',            
             'skin' => $this->skin, 
             'editos' => $editos,
             'articles' => $articles
@@ -52,7 +56,8 @@ class FrontController extends GenericController
 
         if($article !== null) {
             return $this->myRender('/pages/article.html.twig', [
-                'article' => $article,
+            	'page' => 'article', 'slug' => $slug,
+               'article' => $article,
             ]);
         } else {
             return $this->myRender('/_error/404.html.twig', [
@@ -71,12 +76,46 @@ class FrontController extends GenericController
 
         if($webpage !== null) {
             return $this->myRender('/pages/webpage.html.twig', [
-                'webpage' => $webpage,
+            	'page' => 'page', 'slug' => $slug,
+               'webpage' => $webpage,
             ]);
         } else {
             return $this->myRender('/_error/404.html.twig', [
             ]);
         }
+    }
+    
+    
+    /**
+     * @var EntityManagerInterface
+     */
+    private $em;
+    /**
+     * @var EditoRepository
+     */
+    private $editoRepository;
+    /**
+     * @var ArticleRepository 
+     */
+    private $articleRepository;
+    /**
+     * @var TrackerRepository 
+     */
+    private $trackerRepository;
+	 /**
+     * @var WebPageRepository 
+     */
+    private $webpageRepository;
+    
+    public function __construct(EntityManagerInterface $em, MailerInterface $mailer, LoggerInterface $logger, EditoRepository $editoRepository, 
+    			ParametreRepository $paramRepository, ArticleRepository $articleRepository, PageRepository $webpageRepository, TrackerRepository $trackerRepository) 
+    {
+        parent::__construct($mailer, $logger, $paramRepository);
+        $this->em = $em;
+        $this->editoRepository = $editoRepository;
+        $this->articleRepository = $articleRepository;
+        $this->webpageRepository = $webpageRepository;
+        $this->trackerRepository = $trackerRepository;
     }
     
     /**
@@ -105,26 +144,30 @@ class FrontController extends GenericController
     }
     
     /**
-     * @var EditoRepository
+     * Gestion du tracker (bas de page)
+     * @param $type
+     * @param $slug
+     * @return Response
      */
-    private $editoRepository;
-    /**
-     * @var ArticleRepository 
-     */
-    private $articleRepository;
-    /**
-     * @var WebPageRepository 
-     */
-    private $webpageRepository;
-    
-    public function __construct(MailerInterface $mailer, LoggerInterface $logger, 
-            EditoRepository $editoRepository, ParametreRepository $paramRepository, 
-            ArticleRepository $articleRepository, PageRepository $webpageRepository) 
+    public function bottomTracker(string $type, string $slug): Response
     {
-        parent::__construct($mailer, $logger, $paramRepository);
-        $this->editoRepository = $editoRepository;
-        $this->articleRepository = $articleRepository;
-        $this->webpageRepository = $webpageRepository;
+    		$ip = $_SERVER['REMOTE_ADDR'];
+			$tracker = $this->trackerRepository->findOneBy(['type' => $type, 'slug' => $slug, 'ip' => $ip]);    
+	
+    		if(null === $tracker) {
+				$tracker = new Tracker();
+    			$tracker->setType($type);
+    			$tracker->setSlug($slug);
+    			$tracker->setIp($ip);
+
+    			$this->em->persist($tracker);
+    			$this->em->flush();    		
+    		}
+    		
+        	return $this->myRender('/_trans/tracker.bottom.html.twig', [
+         	'type' => $type, 'slug' => $slug, 'ip' => $ip
+        	]);
     }
+    
 
 }

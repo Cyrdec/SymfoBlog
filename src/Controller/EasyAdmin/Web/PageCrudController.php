@@ -74,6 +74,7 @@ class PageCrudController extends AbstractCrudController
 
         $nom = TextField::new('nom');
         $slug = TextField::new('slug');
+        $parent = AssociationField::new('parent');
         $contenu = TextareaField::new('contenu')->setFormType(CKEditorType::class);
         $tags = AssociationField::new('tags');
         $header = BooleanField::new('header');
@@ -84,7 +85,7 @@ class PageCrudController extends AbstractCrudController
         }
 
         return [
-            $nom, $slug, $contenu, $tags, $header, $footer
+            $nom, $slug, $parent, $contenu, $tags, $header, $footer
         ];
     }
     

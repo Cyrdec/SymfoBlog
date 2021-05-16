@@ -2,15 +2,16 @@
 
 namespace App\Controller\Front\Widget;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Twig\Environment;
-use Doctrine\ORM\EntityManagerInterface;;
+use Doctrine\ORM\EntityManagerInterface;
 
-use App\Controller\Front\GenericController;
 use App\Controller\WidgetInterface;
-
+use App\Repository\ParametreRepository;
 use App\Entity\Contact;
 use App\Form\ContactType;
 
@@ -20,8 +21,13 @@ use App\Form\ContactType;
  * @author cedric
  * @Route("/contact", name="")
  */
-class ContactWidget extends GenericController implements WidgetInterface 
+class ContactWidget extends AbstractController implements WidgetInterface 
 {
+    /**
+     * @param string $skin
+     */
+    private $skin;
+    
     public function getName(): string 
     {
         return CategorieWidget::class;
@@ -46,26 +52,34 @@ class ContactWidget extends GenericController implements WidgetInterface
         return [];
     }
     
+    
+      
     /**
      * Affichage du formulaire Contact en mode Page pleine
      * 
+     * @param EntityManagerInterface $entityManager
      * @param Environment $engine
      * @param Request $request
+     * @param ParametreRepository $paramRepository
      * @return Response
      * 
      * @Route("/formulaire", name="widget_contact_full_page_form")
      */
-    public function fullPageContact(EntityManagerInterface $entityManager, Environment $engine, Request $request): Response
+    public function fullPageContact(EntityManagerInterface $entityManager, Environment $engine, Request $request, ParametreRepository $paramRepository): Response
     {
+    	  $siteParams = Yaml::parseFile('../config/site.yaml');
+		  $skinName = $siteParams['parameters']['app.params.skin'];
+        $skin = $paramRepository->findOneBy(['cle' => $skinName])->getValeur();    	
+    	
         $template = '/widgets/contact/page.html.twig';
         if ($engine->getLoader()->exists($this->skin.$template)) {
-            $template = $this->skin.$template;
+            $template = $skin.$template;
         }
         
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact, []);
         $form->handleRequest($request);
-        dump($contact);
+
         if ($request->isMethod('POST') && $form->isValid()) {
             try {
                 $entityManager->getConnection()->beginTransaction();
@@ -82,7 +96,7 @@ class ContactWidget extends GenericController implements WidgetInterface
         }
         
         return $this->render($template, [
-            'skin' => $this->skin,
+            'skin' => $skin,
             'form' => $this->createForm(ContactType::class, $contact, [])->createView(),
         ]);
     }

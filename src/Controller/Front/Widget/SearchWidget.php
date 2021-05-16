@@ -15,7 +15,13 @@ use App\Entity\Article;
  * @author cedric
  * @Route("/search", name="")
  */
-class SearchWidget extends AbstractController implements WidgetInterface {
+class SearchWidget extends AbstractController implements WidgetInterface 
+{
+    
+    /**
+     * @param string $skin
+     */
+    private $skin;
     
     public function getName(): string 
     {

@@ -4,6 +4,8 @@ namespace App\Controller\Front;
 
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Psr\Log\LoggerInterface;
 
 use App\Repository\ParametreRepository;
 
@@ -38,10 +40,14 @@ class WidgetController extends GenericController
      */
     private function init(): array
     {
+    	  $skinName = $this->siteParams['parameters']['app.params.skin'];
+        $skin = $this->paramRepository->findOneBy(['cle' => $skinName])->getValeur();
+        
         $widgets = [];
         $implementWidgets = $this->yaml['widgets']['implement'];
         foreach($implementWidgets as $name => $object) {
             $widget = new $object['class']();
+            //$widget->__set('skin', $skin);
             
             // On récupère les paramètres si existant
             if(array_key_exists('params', $object)) {
@@ -66,15 +72,22 @@ class WidgetController extends GenericController
      * @return array
      */
     private $yaml;
+    /**
+     * @return array
+     */
+    private $siteParams;
 
     /**
      * Constructeur par défaut
      * @param ParametreRepository $paramRepository
      */
-    function __construct(ParametreRepository $paramRepository) 
+    function __construct(MailerInterface $mailer, LoggerInterface $logger, ParametreRepository $paramRepository) 
     {
-        parent::__construct($paramRepository);
+        parent::__construct($mailer, $logger, $paramRepository);
+        
         $this->yaml = Yaml::parseFile('../config/widgets.yaml');
+        $this->siteParams = Yaml::parseFile('../config/site.yaml');
+        
         $this->widgets = $this->init();
     }
     

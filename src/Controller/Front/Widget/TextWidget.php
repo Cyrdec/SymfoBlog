@@ -24,6 +24,11 @@ class TextWidget extends AbstractController implements WidgetInterface
      */
     private $contenu;
     
+    /**
+     * @param string $skin
+     */
+    private $skin;
+    
     public function getName(): string 
     {
         return TextWidget::class;

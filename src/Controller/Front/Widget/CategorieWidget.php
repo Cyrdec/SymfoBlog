@@ -18,6 +18,11 @@ use App\Repository\CategorieRepository;
 class CategorieWidget extends AbstractController implements WidgetInterface 
 {
 
+    /**
+     * @param string $skin
+     */
+    private $skin;
+    
     public function getName(): string 
     {
         return CategorieWidget::class;
